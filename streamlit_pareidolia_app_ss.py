@@ -4,6 +4,7 @@ import numpy as np
 from PIL import Image
 from io import BytesIO
 import base64
+import os
 
 # Function for detecting faces in an image.
 def detectFaceOpenCVDnn(net, frame):
@@ -69,7 +70,8 @@ st.markdown("""
 </div><br />
 """, unsafe_allow_html=True)
 
-st.image("Faces.png", caption=f"Can you spot a face in these images?")
+# st.image("Faces.png", caption=f"Can you spot a face in these images?")
+st.image(os.path.join("sample", "Faces.png"), caption="Can you spot a face in these images?")
 
 #------------------------------------------------
 #------------------------------------------------
@@ -96,7 +98,8 @@ with tab1:
                         "Lone happy pickle 😀"]
     for img, caption in zip(example_images, example_captions):
         if st.button(caption):
-            img_file_buffer = open(img, "rb")
+            # img_file_buffer = open(img, "rb")
+            img_file_buffer = open(os.path.join("sample", img), "rb")
 
     if img_file_buffer is not None:
         # Read the file and convert it to OpenCV Image.
@@ -300,7 +303,8 @@ with tab3:
     test_images = ["cone_2.png", "jeep_anger.png", "gate_green.png"]  # Replace with paths to your test images
     for img in test_images:
         # Read the file and convert it to PIL Image
-        pil_image = Image.open(img)
+        # pil_image = Image.open(img)
+        pil_image = Image.open(os.path.join("sample", img))
 
         # Convert PIL Image to numpy array (OpenCV format, but still RGB)
         test_image = np.array(pil_image)
